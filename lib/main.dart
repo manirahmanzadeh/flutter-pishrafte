@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 
-void main() {
+void main(){
   runApp(
-      MaterialApp(
-        home: MyApp(),
-      )
+    MaterialApp(
+      home: MyApp(),
+    )
   );
 }
 
@@ -17,8 +18,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
 
   AnimationController animationController;
-  Animation animation1;
-  Animation animation2;
+  Animation sizeAnimation;
+
+
 
   @override
   void initState() {
@@ -29,22 +31,36 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin{
       duration: Duration(seconds: 3)
     );
 
-    animation1 = Tween(
-      begin: 0,
-      end: 50
+    sizeAnimation = Tween(
+      begin: 30.0,
+      end: 300.0
     ).animate(animationController);
 
-    animation2= Tween(
-      begin: 10,
-      end: 70
-    ).animate(animationController);
+    animationController.addListener(() { setState(() {
+
+    });});
 
   }
 
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: sizeAnimation.value,
+          height: 100,
+          color: Colors.green,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          animationController.forward();
+        },
+      ),
+    );
   }
 }
 
